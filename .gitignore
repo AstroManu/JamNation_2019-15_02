@@ -3,6 +3,7 @@
 [Oo]bj/
 [Bb]uild/
 [Bb]uilds/
+[Ww]wiseSoundbank/
 Assets/AssetStoreTools*
 
 # Visual Studio cache directory
@@ -34,3 +35,6 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+SacrificeYourFriends_0\.2/Assets/WwiseSettings\.xml
+SYF_Integration/
