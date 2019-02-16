@@ -41,7 +41,7 @@ public class EvolutionTree : MonoBehaviour {
 		n.transform.localPosition = initPos;
 
 		//Color line & node
-
+		n.GetComponent<Image>().color = winnerColor;
 		if(contestantsLine.Length >= (winnerId + 1))
 			contestantsLine[winnerId].GetComponent<Image>().color = winnerColor;
 
