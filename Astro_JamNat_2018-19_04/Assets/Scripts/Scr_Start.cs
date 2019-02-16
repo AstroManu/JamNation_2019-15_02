@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class Scr_Start : MonoBehaviour {
 
@@ -15,7 +16,7 @@ public class Scr_Start : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        PanelStart();
+        //PanelStart();
     }
 	
 	// Update is called once per frame
@@ -37,6 +38,7 @@ public class Scr_Start : MonoBehaviour {
         panelContinuer.gameObject.SetActive(false);
         panelRegles.gameObject.SetActive(false);
         panelQuit.gameObject.SetActive(false);
+
 
     }
 
