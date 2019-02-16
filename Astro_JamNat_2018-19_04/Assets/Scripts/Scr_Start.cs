@@ -16,7 +16,7 @@ public class Scr_Start : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        //PanelStart();
+        PanelStart();
     }
 	
 	// Update is called once per frame
