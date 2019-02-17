@@ -17,6 +17,7 @@ public abstract class Match{
 	protected List<Hazard> historyHazards = new List<Hazard>();
 	protected string postHazard = "";
 	protected string[] hazardAnswer = new string[] { };
+	protected string historyHazardText = "";
 
 	public Hazard NextTurn()
 	{	
@@ -37,6 +38,23 @@ public abstract class Match{
 			//Random Hazard
 			else
 				 hazardSummoned = PlayRandomHazard();
+
+			//Add in history
+			historyHazards.Add(hazardSummoned);
+
+			//Safe history text
+			historyHazardText += "Turn " + turnId + "- ";
+			historyHazardText += hazardSummoned.hazardName;
+			historyHazardText += "\n\n";
+
+			//Display Hazard Page
+			TextManager.instance.DisplayHazard(hazardSummoned);
+
+			//Display history
+			TextManager.instance.SetHazards(GetHazards());
+			
+			//Add post hazard if Hazard has one
+			postHazard = hazardSummoned.postHazardTag;
 		}
 
 		return hazardSummoned;
@@ -45,6 +63,7 @@ public abstract class Match{
 	public void SetHazardAnswer(string[] answers)
 	{
 		hazardAnswer = answers;
+		TextManager.instance.CloseHazard();
 	}
 
 	public string GetName()
@@ -55,6 +74,16 @@ public abstract class Match{
 	public int GetNumber()
 	{
 		return matchId;
+	}
+
+	public string GetRules()
+	{
+		return "-rules-";
+	}
+
+	public string GetHazards()
+	{
+		return historyHazardText;
 	}
 
 	protected Hazard PlayRandomHazard()
@@ -73,8 +102,6 @@ public abstract class Match{
 		if (possibleHazards.Count > 0)
 			hazardSummoned = possibleHazards[Random.Range(0, possibleHazards.Count)];
 
-		//Add post hazard if Hazard has one
-		postHazard = hazardSummoned.postHazardTag;
 
 		return hazardSummoned;
 	}

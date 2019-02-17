@@ -27,7 +27,7 @@ public class MatchCold : Match
 		//All hazards possibles
 		n = "Avalanche";
 		d = "Oh no, ya une grosse boule de neige qui va maybe vous tuer." +
-			"Pour partir a temps, vous pouvez depenser 4 cubes jaunes. Avez vous depensee 4 cubes jaunes?";
+			"Pour partir a temps, vous pouvez depenser  <sprite=0>. Avez vous depensee 4 cubes jaunes?";
 		listHazards.Add(new Hazard(n, d, new Vector2(1, 50), new string[] { "Damn Right", "Fuck no"}, "Avalanche Fallout"));
 
 		n = "Blizzard";
