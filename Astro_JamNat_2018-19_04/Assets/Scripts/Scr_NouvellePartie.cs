@@ -24,9 +24,15 @@ public class Scr_NouvellePartie : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-
         if (nbrPlayer > 6)
             nbrPlayer = 6;
+
+        if (nbrPlayer == 0) {
+            foreach(Transform child in playerGroup.gameObject.transform){
+                Destroy(child.gameObject);
+            }
+            StartButton.gameObject.SetActive(false);
+        }
 	}
 
     public void NbrPlayer () {
