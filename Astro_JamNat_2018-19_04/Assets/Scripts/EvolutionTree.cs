@@ -17,6 +17,7 @@ public class EvolutionTree : MonoBehaviour {
 	private float totalDistanceY = 0;
 	private Vector2[] contestantsPosition = new Vector2[] { new Vector2(0,0)};
 	private GameObject[] contestantsLine = new GameObject[] {};
+	float intensity = 0;
 
 	private void Update()
 	{
@@ -28,6 +29,21 @@ public class EvolutionTree : MonoBehaviour {
 			Next(2, Random.Range(2, 7));
 		if (Input.GetKeyDown(KeyCode.Alpha4))
 			Next(3, Random.Range(2, 7));
+
+
+
+		if (Input.GetKeyDown(KeyCode.O))
+		{
+			AkSoundEngine.PostEvent("MUSIC_START", gameObject);
+			AkSoundEngine.SetRTPCValue("Intensity", intensity);
+		}
+
+		if (Input.GetKeyDown(KeyCode.P))
+		{
+			intensity += 0.1f;
+			AkSoundEngine.SetRTPCValue("Intensity", intensity);
+		}
+
 	}
 
 	void Next(int winnerId, int nbPlayer)

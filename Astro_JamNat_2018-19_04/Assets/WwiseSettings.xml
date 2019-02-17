@@ -6,8 +6,8 @@
   <CreateWwiseListener>true</CreateWwiseListener>
   <GenerateSoundBanksAsPreBuildStep>false</GenerateSoundBanksAsPreBuildStep>
   <ShowMissingRigidBodyWarning>true</ShowMissingRigidBodyWarning>
-  <SoundbankPath>Audio/GeneratedSoundBanks</SoundbankPath>
+  <SoundbankPath>JamNationIV - Copie/SoundBanks/</SoundbankPath>
   <WwiseInstallationPathMac />
   <WwiseInstallationPathWindows />
-  <WwiseProjectPath>../../Astro_JamNat_2018-19_04/Assets/WwiseSoundbank/SYF_SFX.wproj</WwiseProjectPath>
+  <WwiseProjectPath>StreamingAssets/JamNationIV_Soundbank02 - Copie/JamNationIV.wproj</WwiseProjectPath>
 </WwiseSettings>

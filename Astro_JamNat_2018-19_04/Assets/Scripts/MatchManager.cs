@@ -21,6 +21,24 @@ public class MatchManager : MonoBehaviour {
 	List<Match> historyMatches = new List<Match>();
 	Match currentMatch;
 	int nbMatch = 0;
+	string[] playerNames;
+
+	private void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.Return))
+		{
+			NewMatch(4);
+
+			TextManager.instance.SetTitle(currentMatch.GetName());
+			TextManager.instance.SetRules(currentMatch.GetRules());
+			TextManager.instance.SetHazards("");
+		}
+
+		if (Input.GetKeyDown(KeyCode.Space))
+		{
+			NextTurn();
+		}
+	}
 
 	public void SetHazardAnswer(string[] answers)
 	{
@@ -50,5 +68,10 @@ public class MatchManager : MonoBehaviour {
 	public Hazard NextTurn()
 	{
 		return currentMatch.NextTurn();
+	}
+
+	public void Init(bool continueGame, string[] playerNames)
+	{
+
 	}
 }
