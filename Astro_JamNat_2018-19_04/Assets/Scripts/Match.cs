@@ -28,24 +28,29 @@ public abstract class Match{
 
 		//If Hazard timer == 0, Play a hazard
 		if(nextHazardTimer == 0)
-		{
-			nextHazardTimer = Random.Range(1, 6);
+        { 
+            //Init
+            nextHazardTimer = Random.Range(1, 4);
 
-			//Scripted Hazard
-			if (!postHazard.Equals(""))
-				hazardSummoned = PlayScriptedHazard(postHazard);
+            //End game
+            if (historyHazards.Count >= 4)
+                hazardSummoned = new Hazard("Ere Terminee", "Vous avez termine la partie. Vous pouvez calculer vos points. \n" + GetRules(), new Vector2(0,0), new string[] {"Continuer"}, "END");
 
-			//Random Hazard
-			else
-				 hazardSummoned = PlayRandomHazard();
+            //Scripted Hazard
+            else if (!postHazard.Equals(""))
+                hazardSummoned = PlayScriptedHazard(postHazard);
+
+            //Random Hazard
+            else
+                hazardSummoned = PlayRandomHazard();
 
 			//Add in history
 			historyHazards.Add(hazardSummoned);
 
 			//Safe history text
-			historyHazardText += "Turn " + turnId + "- ";
+			historyHazardText += "-[Turn " + turnId + "] <b>";
 			historyHazardText += hazardSummoned.hazardName;
-			historyHazardText += "\n\n";
+			historyHazardText += "</b>\n";
 
 			//Display Hazard Page
 			TextManager.instance.DisplayHazard(hazardSummoned);
@@ -68,7 +73,7 @@ public abstract class Match{
 
 	public string GetName()
 	{
-		return matchName;
+		return ("Partie " + matchId + ": " + matchName);
 	}
 
 	public int GetNumber()
@@ -78,7 +83,17 @@ public abstract class Match{
 
 	public string GetRules()
 	{
-		return "-rules-";
+        string rules = "";
+        for(int i=0; i<adaptationPoints.Length; i++)
+        {
+            rules += "<sprite name=p" + (3-i) + ">";
+            rules += "<sprite name=" + TextManager.instance.GetAdaptationCode(adaptationPoints[i]) + ">";
+            rules += "   ";
+        }
+
+        rules += "                <sprite name=p1><sprite name=" + TextManager.instance.GetGeneCode(genePoint) + ">";
+
+        return rules;
 	}
 
 	public string GetHazards()
@@ -94,7 +109,7 @@ public abstract class Match{
 		List<Hazard> possibleHazards = new List<Hazard>();
 		foreach (Hazard h in listHazards)
 		{
-			if (h.hazardTimeRange[0] <= turnId && h.hazardTimeRange[1] >= turnId)
+			if (h.postHazardTag.Equals("") || (!h.postHazardTag.Equals("") && historyHazards.Count < 3))
 				possibleHazards.Add(h);
 		}
 

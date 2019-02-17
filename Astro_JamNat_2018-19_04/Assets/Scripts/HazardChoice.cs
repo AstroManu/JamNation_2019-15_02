@@ -14,6 +14,14 @@ public class HazardChoice : MonoBehaviour {
 
 	public void OnPress()
 	{
+        //END
+        if(text.text.Equals("Continuer"))
+        {
+            TextManager.instance.EndMatch();
+            return;
+        }
+
+        //Continue
 		MatchManager.instance.SetHazardAnswer(new string[] { text.text });
 	}
 }

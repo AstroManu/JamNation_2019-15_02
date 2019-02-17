@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Adaptation {Aquatique, Chaud, Froid, Famine, Maladie, Secheresse}
-public enum Gene { Bleu, Jaune, Mauve, Vert};
+public enum Adaptation {Aquatique, Chaud, Froid, Famine, Maladie, Secheresse, Predator}
+public enum Gene { Bleu, Orange, Mauve, Vert};
 
 public class MatchManager : MonoBehaviour {
 
@@ -16,29 +16,19 @@ public class MatchManager : MonoBehaviour {
 			instance = this;
 		}
 	}
-	#endregion
+    #endregion
+
+    public int playerWinner = 0;
 
 	List<Match> historyMatches = new List<Match>();
 	Match currentMatch;
 	int nbMatch = 0;
-	string[] playerNames;
+	string[] playerNames = new string[] { "Mx", "Al", "Mb", "Fx"};
 
-	private void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.Return))
-		{
-			NewMatch(4);
-
-			TextManager.instance.SetTitle(currentMatch.GetName());
-			TextManager.instance.SetRules(currentMatch.GetRules());
-			TextManager.instance.SetHazards("");
-		}
-
-		if (Input.GetKeyDown(KeyCode.Space))
-		{
-			NextTurn();
-		}
-	}
+    private void Start()
+    {
+        NewMatch(playerNames.Length);
+    }
 
 	public void SetHazardAnswer(string[] answers)
 	{
@@ -51,8 +41,8 @@ public class MatchManager : MonoBehaviour {
 		Match newMatch = null;
 		nbMatch++;
 
-		//Randomly start a match
-		int r = Random.Range(0, 1);
+        //Randomly start a match
+        int r = Random.Range(0, 1);
 		switch(r)
 		{
 			case 0:
@@ -60,10 +50,18 @@ public class MatchManager : MonoBehaviour {
 				break;
 		}
 
+        //Branch Tree
+        EvolutionTree.instance.Next(playerWinner, playerNames.Length);
+
 		//Add match to history
 		currentMatch = newMatch;
 		historyMatches.Add(newMatch);
-	}
+
+        //Text
+        TextManager.instance.SetTitle(currentMatch.GetName());
+        TextManager.instance.SetRules(currentMatch.GetRules());
+        TextManager.instance.SetHazards("");
+    }
 
 	public Hazard NextTurn()
 	{
@@ -74,4 +72,14 @@ public class MatchManager : MonoBehaviour {
 	{
 
 	}
+
+    public string GetPlayerName(int i)
+    {
+        return playerNames[i];
+    }
+
+    public string[] GetPlayerName()
+    {
+        return playerNames;
+    }
 }

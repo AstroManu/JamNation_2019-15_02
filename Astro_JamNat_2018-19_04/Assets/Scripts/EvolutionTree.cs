@@ -1,11 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class EvolutionTree : MonoBehaviour {
 
-	public GameObject nodePrefab;
+    #region Singleton
+    public static EvolutionTree instance;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+
+        contestantsPosition = new Vector2[] { new Vector2(maxDistanceX / 2, 0) };
+    }
+    #endregion
+
+    public GameObject nodePrefab;
 	public GameObject linePrefab;
 	public Color winnerColor;
 	public Color defaultColor;
@@ -15,38 +29,64 @@ public class EvolutionTree : MonoBehaviour {
 
 	private int nbMatch = 0;
 	private float totalDistanceY = 0;
-	private Vector2[] contestantsPosition = new Vector2[] { new Vector2(0,0)};
+    private Vector2[] contestantsPosition;
 	private GameObject[] contestantsLine = new GameObject[] {};
-	float intensity = 0;
+	private float intensity = 0;
+    private bool isZoomed = false;
+    private List<GameObject> allNodes = new List<GameObject>();
+    private List<GameObject> allLines = new List<GameObject>();
+    private List<Vector3> allNodesPosition = new List<Vector3>();
+    private List<Vector3> allNodesPositionZoomed = new List<Vector3>();
 
 	private void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.Alpha1))
-			Next(0, Random.Range(2, 7));
-		if (Input.GetKeyDown(KeyCode.Alpha2))
-			Next(1, Random.Range(2, 7));
-		if (Input.GetKeyDown(KeyCode.Alpha3))
-			Next(2, Random.Range(2, 7));
-		if (Input.GetKeyDown(KeyCode.Alpha4))
-			Next(3, Random.Range(2, 7));
+        //Scroll
+        if(Input.mouseScrollDelta[0] > 0 && transform.localPosition.y < 0){ }
+        else transform.position += (Vector3)Input.mouseScrollDelta * 20;
+
+        //Zoom animation
+        if (isZoomed)
+        {
+            //Nodes
+            for(int i=0; i<allNodes.Count; i++)
+            {
+                allNodes[i].transform.localPosition = Vector3.Lerp(allNodes[i].transform.localPosition, allNodesPositionZoomed[i], 0.1f);
+            }
+
+            //Lines
+            float time = Time.deltaTime;
+            foreach(GameObject l in allLines)
+            {
+                Image img = l.GetComponent<Image>();
+                Color c = img.color;
+                c.a = Mathf.Max(c.a - time * 5, 0);
+                img.color = c;
+            }
+        }
+
+        else
+        {
+            //Nodes
+            for (int i = 0; i < allNodes.Count; i++)
+            {
+                allNodes[i].transform.localPosition = Vector3.Lerp(allNodes[i].transform.localPosition, allNodesPosition[i], 0.1f);
+            }
+
+            //Lines
+            float time = Time.deltaTime;
+            foreach (GameObject l in allLines)
+            {
+                Image img = l.GetComponent<Image>();
+                Color c = img.color;
+                c.a = Mathf.Min(c.a + time, 1);
+                img.color = c;
+            }
+        }
 
 
+    }
 
-		if (Input.GetKeyDown(KeyCode.O))
-		{
-			AkSoundEngine.PostEvent("MUSIC_START", gameObject);
-			AkSoundEngine.SetRTPCValue("Intensity", intensity);
-		}
-
-		if (Input.GetKeyDown(KeyCode.P))
-		{
-			intensity += 0.1f;
-			AkSoundEngine.SetRTPCValue("Intensity", intensity);
-		}
-
-	}
-
-	void Next(int winnerId, int nbPlayer)
+	public void Next(int winnerId, int nbPlayer)
 	{
 		//Init
 		nbMatch++;
@@ -54,12 +94,25 @@ public class EvolutionTree : MonoBehaviour {
 
 		//Add knob to winner branch
 		GameObject n = Instantiate(nodePrefab, transform);
-		n.transform.localPosition = initPos;
+        n.transform.localPosition = initPos;
+        n.transform.SetAsLastSibling();
+        allNodes.Add(n);
+        allNodesPosition.Add(n.transform.localPosition);
+        allNodesPositionZoomed.Add(new Vector3(maxDistanceX/2, 55 * nbMatch, 0));
+
+        //Write Initial in node
+        if(nbMatch == 1)
+            n.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "";
+        else
+            n.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = MatchManager.instance.GetPlayerName(winnerId);
 
 		//Color line & node
 		n.GetComponent<Image>().color = winnerColor;
-		if(contestantsLine.Length >= (winnerId + 1))
-			contestantsLine[winnerId].GetComponent<Image>().color = winnerColor;
+        if (contestantsLine.Length >= (winnerId + 1))
+        {
+            contestantsLine[winnerId].GetComponent<Image>().color = winnerColor;
+            contestantsLine[winnerId].GetComponent<Image>().sprite = null;
+        }
 
 		//Gray out other lines
 		for (int i=0; i < contestantsLine.Length; i++)
@@ -86,14 +139,16 @@ public class EvolutionTree : MonoBehaviour {
 		contestantsPosition = allPos;
 
 		//Spawn new lines from knob
-		GameObject[] allLines = new GameObject[nbPlayer];
+		GameObject[] allNewLines = new GameObject[nbPlayer];
 		for(int i=0; i<contestantsPosition.Length; i++)
 		{
 			//Create line
 			GameObject line = Instantiate(linePrefab, transform);
 			line.transform.localPosition = initPos;
 			line.GetComponent<Image>().color = defaultColor;
-			allLines[i] = line;
+			allNewLines[i] = line;
+            line.transform.SetAsFirstSibling();
+            allLines.Add(line);
 
 			//Rotate
 			Vector2 vectorToTarget = contestantsPosition[i] - initPos;
@@ -109,6 +164,11 @@ public class EvolutionTree : MonoBehaviour {
 
 		}
 
-		contestantsLine = allLines;
+		contestantsLine = allNewLines;
 	}
+
+    public void ToggleZoom()
+    {
+        isZoomed = !isZoomed;
+    }
 }

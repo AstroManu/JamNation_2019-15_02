@@ -22,11 +22,14 @@ public class TextManager : MonoBehaviour {
 
 	public GameObject HazardChoicePrefab;
 	public GameObject hazardWindow;
-	public TextMeshProUGUI hazardTitle;
+    public TextMeshProUGUI hazardTitle;
 	public TextMeshProUGUI HazardDescription;
 	public Transform choiceLocation;
+    public GameObject PlayerButtonPrefab;
+    public GameObject endGameWindow;
+    public Transform playerWinnerLocation;
 
-	public void SetTitle(string text)
+    public void SetTitle(string text)
 	{
 		title.text = text;
 	}
@@ -76,4 +79,83 @@ public class TextManager : MonoBehaviour {
 		hazardWindow.SetActive(false);
 
 	}
+
+    public void EndMatch()
+    {
+        //Init
+        CloseHazard();
+
+        //Open
+        endGameWindow.SetActive(true);
+
+        //Create player button
+        string[] names = MatchManager.instance.GetPlayerName();
+        for (int i = 0; i < names.Length; i++)
+        {
+            CustomButton cb = Instantiate(PlayerButtonPrefab, playerWinnerLocation).GetComponent<CustomButton>();
+            cb.id = i;
+            cb.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = names[i];
+        }
+    }
+
+    public void CloseEndMatch()
+    {
+        //Destroy all old choices
+        foreach (Transform t in playerWinnerLocation)
+        {
+            Destroy(t.gameObject);
+        }
+
+        endGameWindow.SetActive(false);
+
+    }
+
+    public string GetAdaptationCode(Adaptation a)
+    {
+        switch(a)
+        {
+            case Adaptation.Aquatique:
+                return "ain";
+
+            case Adaptation.Chaud:
+                return "ach";
+
+            case Adaptation.Famine:
+                return "afa";
+
+            case Adaptation.Froid:
+                return "afr";
+
+            case Adaptation.Maladie:
+                return "ama";
+
+            case Adaptation.Secheresse:
+                return "ase";
+
+            case Adaptation.Predator:
+                return "apr";
+        }
+
+        return "";
+    }
+
+    public string GetGeneCode(Gene g)
+    {
+        switch (g)
+        {
+            case Gene.Bleu:
+                return "gb";
+
+            case Gene.Orange:
+                return "go";
+
+            case Gene.Mauve:
+                return "gm";
+
+            case Gene.Vert:
+                return "gv";
+        }
+
+        return "";
+    }
 }
