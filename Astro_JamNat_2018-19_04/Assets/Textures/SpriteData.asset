@@ -1,0 +1,262 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84a92b25f83d49b9bc132d206b370281, type: 3}
+  m_Name: SpriteData
+  m_EditorClassIdentifier: 
+  hashCode: 86109561
+  material: {fileID: 21040954243440892}
+  materialHashCode: 0
+  spriteSheet: {fileID: 2800000, guid: a97462030adf8d54ba230669a83469ab, type: 3}
+  spriteInfoList:
+  - id: 0
+    x: 0
+    y: 800
+    width: 400
+    height: 400
+    xOffset: -200
+    yOffset: 200
+    xAdvance: 400
+    scale: 1
+    name: gb
+    hashCode: 3365
+    unicode: 251
+    pivot: {x: 0.5, y: 0.5}
+    sprite: {fileID: 0}
+  - id: 1
+    x: 400
+    y: 800
+    width: 400
+    height: 400
+    xOffset: -200
+    yOffset: 200
+    xAdvance: 400
+    scale: 1
+    name: gm
+    hashCode: 3370
+    unicode: 255
+    pivot: {x: 0.5, y: 0.5}
+    sprite: {fileID: 0}
+  - id: 2
+    x: 800
+    y: 800
+    width: 400
+    height: 400
+    xOffset: -200
+    yOffset: 200
+    xAdvance: 400
+    scale: 1
+    name: go
+    hashCode: 3368
+    unicode: 255
+    pivot: {x: 0.5, y: 0.5}
+    sprite: {fileID: 0}
+  - id: 3
+    x: 1200
+    y: 800
+    width: 400
+    height: 400
+    xOffset: -200
+    yOffset: 200
+    xAdvance: 400
+    scale: 1
+    name: gv
+    hashCode: 3377
+    unicode: 255
+    pivot: {x: 0.5, y: 0.5}
+    sprite: {fileID: 0}
+  - id: 4
+    x: 1600
+    y: 800
+    width: 400
+    height: 400
+    xOffset: -200
+    yOffset: 200
+    xAdvance: 400
+    scale: 1
+    name: p1
+    hashCode: 3649
+    unicode: 241
+    pivot: {x: 0.5, y: 0.5}
+    sprite: {fileID: 0}
+  - id: 5
+    x: 0
+    y: 400
+    width: 400
+    height: 400
+    xOffset: -200
+    yOffset: 200
+    xAdvance: 400
+    scale: 1
+    name: p2
+    hashCode: 3650
+    unicode: 242
+    pivot: {x: 0.5, y: 0.5}
+    sprite: {fileID: 0}
+  - id: 6
+    x: 400
+    y: 400
+    width: 400
+    height: 400
+    xOffset: -200
+    yOffset: 200
+    xAdvance: 400
+    scale: 1
+    name: p3
+    hashCode: 3651
+    unicode: 243
+    pivot: {x: 0.5, y: 0.5}
+    sprite: {fileID: 0}
+  - id: 7
+    x: 800
+    y: 400
+    width: 400
+    height: 400
+    xOffset: -200
+    yOffset: 200
+    xAdvance: 400
+    scale: 1
+    name: p-1
+    hashCode: 121292
+    unicode: 1
+    pivot: {x: 0.5, y: 0.5}
+    sprite: {fileID: 0}
+  - id: 8
+    x: 1200
+    y: 400
+    width: 400
+    height: 400
+    xOffset: -200
+    yOffset: 200
+    xAdvance: 400
+    scale: 1
+    name: ain
+    hashCode: 108934
+    unicode: 2815
+    pivot: {x: 0.5, y: 0.5}
+    sprite: {fileID: 0}
+  - id: 9
+    x: 1600
+    y: 400
+    width: 400
+    height: 400
+    xOffset: -200
+    yOffset: 200
+    xAdvance: 400
+    scale: 1
+    name: ach
+    hashCode: 108874
+    unicode: 2767
+    pivot: {x: 0.5, y: 0.5}
+    sprite: {fileID: 0}
+  - id: 10
+    x: 0
+    y: 0
+    width: 400
+    height: 400
+    xOffset: -200
+    yOffset: 200
+    xAdvance: 400
+    scale: 1
+    name: afa
+    hashCode: 108966
+    unicode: 2810
+    pivot: {x: 0.5, y: 0.5}
+    sprite: {fileID: 0}
+  - id: 11
+    x: 400
+    y: 0
+    width: 400
+    height: 400
+    xOffset: -200
+    yOffset: 200
+    xAdvance: 400
+    scale: 1
+    name: afr
+    hashCode: 108981
+    unicode: 2815
+    pivot: {x: 0.5, y: 0.5}
+    sprite: {fileID: 0}
+  - id: 12
+    x: 800
+    y: 0
+    width: 400
+    height: 400
+    xOffset: -200
+    yOffset: 200
+    xAdvance: 400
+    scale: 1
+    name: ama
+    hashCode: 109069
+    unicode: 2810
+    pivot: {x: 0.5, y: 0.5}
+    sprite: {fileID: 0}
+  - id: 13
+    x: 1200
+    y: 0
+    width: 400
+    height: 400
+    xOffset: -200
+    yOffset: 200
+    xAdvance: 400
+    scale: 1
+    name: apr
+    hashCode: 109411
+    unicode: 2815
+    pivot: {x: 0.5, y: 0.5}
+    sprite: {fileID: 0}
+  - id: 14
+    x: 1600
+    y: 0
+    width: 400
+    height: 400
+    xOffset: -200
+    yOffset: 200
+    xAdvance: 400
+    scale: 1
+    name: ase
+    hashCode: 109399
+    unicode: 2814
+    pivot: {x: 0.5, y: 0.5}
+    sprite: {fileID: 0}
+  fallbackSpriteAssets: []
+--- !u!21 &21040954243440892
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: TextMeshPro/Sprite
+  m_Shader: {fileID: 4800000, guid: cf81c85f95fe47e1a27f6ae460cf182c, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: a97462030adf8d54ba230669a83469ab, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
