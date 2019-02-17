@@ -7,9 +7,11 @@ public abstract class Match{
 	public int matchId;
 	public float nbPlayers;
 	public float winnerId;
+	public string winnerName;
+	public int turnId = 0;
 
-	protected int turnId = 0;
 	protected int nextHazardTimer = 0;
+	protected string matchDescription;
 	protected string matchName;
 	protected Adaptation[] adaptationPoints;
 	protected Gene genePoint;
@@ -18,6 +20,7 @@ public abstract class Match{
 	protected string postHazard = "";
 	protected string[] hazardAnswer = new string[] { };
 	protected string historyHazardText = "";
+	protected int[] scorePoints = new int[] { 2,1,1};
 
 	public Hazard NextTurn()
 	{	
@@ -34,7 +37,7 @@ public abstract class Match{
 
             //End game
             if (historyHazards.Count >= 4)
-                hazardSummoned = new Hazard("Ere Terminee", "Vous avez termine la partie. Vous pouvez calculer vos points. \n" + GetRules(), new Vector2(0,0), new string[] {"Continuer"}, "END");
+                hazardSummoned = new Hazard("Ere Terminee", "Vous avez termine la partie. Vous pouvez calculer vos points. \n <size=100>" + GetRules() + "</size>", new Vector2(0,0), new string[] {"Continuer"}, "END");
 
             //Scripted Hazard
             else if (!postHazard.Equals(""))
@@ -83,15 +86,15 @@ public abstract class Match{
 
 	public string GetRules()
 	{
-        string rules = "";
+		string rules = "";
         for(int i=0; i<adaptationPoints.Length; i++)
         {
-            rules += "<sprite name=p" + (3-i) + ">";
+            rules += "<sprite name=p" + scorePoints[i] + ">";
             rules += "<sprite name=" + TextManager.instance.GetAdaptationCode(adaptationPoints[i]) + ">";
             rules += "   ";
         }
 
-        rules += "                <sprite name=p1><sprite name=" + TextManager.instance.GetGeneCode(genePoint) + ">";
+        rules += "      <sprite name=p1><sprite name=" + TextManager.instance.GetGeneCode(genePoint) + ">";
 
         return rules;
 	}
@@ -99,6 +102,17 @@ public abstract class Match{
 	public string GetHazards()
 	{
 		return historyHazardText;
+	}
+
+	public string GetDescription()
+	{
+		return matchDescription;
+	}
+
+	public void SetWinnerId(int id, string name)
+	{
+		winnerId = id;
+		winnerName = name;
 	}
 
 	protected Hazard PlayRandomHazard()

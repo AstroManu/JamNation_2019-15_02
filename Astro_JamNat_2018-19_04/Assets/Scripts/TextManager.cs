@@ -19,6 +19,7 @@ public class TextManager : MonoBehaviour {
 	public TextMeshProUGUI title;
 	public TextMeshProUGUI rules;
 	public TextMeshProUGUI hazards;
+	public TextMeshProUGUI description;
 
 	public GameObject HazardChoicePrefab;
 	public GameObject hazardWindow;
@@ -28,8 +29,10 @@ public class TextManager : MonoBehaviour {
     public GameObject PlayerButtonPrefab;
     public GameObject endGameWindow;
     public Transform playerWinnerLocation;
+	public GameObject nextTurnButton;
+	public GameObject evolutionsGenesWindow;
 
-    public void SetTitle(string text)
+	public void SetTitle(string text)
 	{
 		title.text = text;
 	}
@@ -42,6 +45,11 @@ public class TextManager : MonoBehaviour {
 	public void SetHazards(string text)
 	{
 		hazards.text = text;
+	}
+
+	public void SetDescription(string text)
+	{
+		description.text = text;
 	}
 
 	public void DisplayHazard(Hazard hazard)
@@ -110,6 +118,17 @@ public class TextManager : MonoBehaviour {
 
     }
 
+	public void EvolutionWindow()
+	{
+		evolutionsGenesWindow.SetActive(true);
+	}
+
+	public void CloseEvolutionWindow()
+	{
+		evolutionsGenesWindow.SetActive(false);
+		ShowHideNextTurnButton(true);
+	}
+
     public string GetAdaptationCode(Adaptation a)
     {
         switch(a)
@@ -158,4 +177,10 @@ public class TextManager : MonoBehaviour {
 
         return "";
     }
+
+	public void ShowHideNextTurnButton(bool show)
+	{
+		nextTurnButton.SetActive(show);
+		nextTurnButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Fin du Tour " + (MatchManager.instance.GetNbTurn() + 1);
+	}
 }
