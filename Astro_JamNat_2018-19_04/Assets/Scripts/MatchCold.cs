@@ -15,13 +15,13 @@ public class MatchCold : Match
 	protected override void Init()
 	{
 		//Init
-		nextHazardTimer = Random.Range(1, 6);
+		nextHazardTimer = Random.Range(2, 6);
 		string n = "";
 		string d = "";
 
 		//Match rules
 		matchName = "Ere Glaciale";
-		adaptationPoints = new Adaptation[] {Adaptation.Froid, Adaptation.Aquatique, Adaptation.Famine, Adaptation.Chaud};
+		adaptationPoints = new Adaptation[] {Adaptation.Froid, Adaptation.Aquatique};
 		genePoint = Gene.Bleu;
 
 		//All hazards possibles
