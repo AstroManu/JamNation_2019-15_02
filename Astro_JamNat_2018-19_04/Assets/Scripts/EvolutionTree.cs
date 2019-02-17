@@ -28,6 +28,7 @@ public class EvolutionTree : MonoBehaviour {
 	public float distanceY;
 
 	private int nbMatch = 0;
+	private Vector2 scrollVelocity = new Vector2(0,0);
 	private float totalDistanceY = 0;
     private Vector2[] contestantsPosition;
 	private GameObject[] contestantsLine = new GameObject[] {};
@@ -40,9 +41,14 @@ public class EvolutionTree : MonoBehaviour {
 
 	private void Update()
 	{
-        //Scroll
-        if(Input.mouseScrollDelta[0] > 0 && transform.localPosition.y < 0){ }
-        else transform.position += (Vector3)Input.mouseScrollDelta * 20;
+		//Scroll
+		if (Input.mouseScrollDelta[0] > 0 && transform.localPosition.y < 0) { }
+		else
+		{
+			scrollVelocity += Input.mouseScrollDelta * 10;
+			transform.position += (Vector3)scrollVelocity;
+			scrollVelocity /= 1.15f;
+		}
 
         //Zoom animation
         if (isZoomed)
@@ -99,6 +105,7 @@ public class EvolutionTree : MonoBehaviour {
         allNodes.Add(n);
         allNodesPosition.Add(n.transform.localPosition);
         allNodesPositionZoomed.Add(new Vector3(maxDistanceX/2, 55 * nbMatch, 0));
+		n.GetComponent<CustomButton>().id = nbMatch - 1;
 
         //Write Initial in node
         if(nbMatch == 1)

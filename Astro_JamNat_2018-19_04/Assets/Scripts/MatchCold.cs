@@ -20,19 +20,20 @@ public class MatchCold : Match
 		string d = "";
 
 		//Match rules
-		matchName = "Ere Glaciale";
-		adaptationPoints = new Adaptation[] {Adaptation.Froid, Adaptation.Aquatique};
+		matchName = "Paléozoïque";
+		matchDescription = "Le PaléozoÏque est une ère géologique qui s'étend de -541 à -252,2 millions d'années. " +
+			"Cette ère est parfois appelée Ère Primaire (ou Ère des Poissons). ";
+		adaptationPoints = new Adaptation[] {Adaptation.Aquatique, Adaptation.Predator, Adaptation.Chaud};
 		genePoint = Gene.Bleu;
 
 		//All hazards possibles
-		n = "Avalanche";
-		d = "Oh no, ya une grosse boule de neige qui va maybe vous tuer." +
-			"Pour partir a temps, vous pouvez depenser  <sprite=0>. Avez vous depensee 4 cubes jaunes?";
-		listHazards.Add(new Hazard(n, d, new Vector2(1, 50), new string[] { "Damn Right", "Fuck no"}, "Avalanche Fallout"));
+		n = "Tremblement de Terre";
+		d = "Chaque espèce (joueur) doit immédiatement dépenser trois gènes ou perdre une évolution de son choix.";
+		listHazards.Add(new Hazard(n, d, new Vector2(1, 50), new string[] { "Okay!"}, ""));
 
-		n = "Blizzard";
-		d = "Un gros nuage de poudre neigeuse limite votre vision. Vous ne pouvez donc pas vous reproduire pendant ce tour.";
-		listHazards.Add(new Hazard(n, d, new Vector2(1, 50), new string[] { }, ""));
+		n = "L’appel de la Terre";
+		d = "Vous devrez bientôt vous adapter à la vie sur la terre ferme. Trouvez les évolutions Amphibie, Système immunitaire ou Pied Palmés.";
+		listHazards.Add(new Hazard(n, d, new Vector2(1, 50), new string[] { "Parfait!"}, "Résolution"));
 	}
 
 	protected override Hazard PlayScriptedHazard(string tag)
@@ -42,17 +43,9 @@ public class MatchCold : Match
 
 		switch(tag)
 		{
-			case "Avalanche Fallout":
-				if (hazardAnswer[0].Equals("Damn Right"))
-				{
-					d = "Vous avez reussit a eviter une big old catastrophe. Well played. Y'all get a cookie.";
-					hazard = new Hazard(tag, d, new Vector2(0, 50), new string[] { }, "");
-				}
-				else
-				{
-					d = "Naughty boys. Le momentum des milliers kilogrammes de neiges vous snap le cou. Vous perdez donc chacun une evolution";
-					hazard = new Hazard(tag, d, new Vector2(0, 50), new string[] { }, "");
-				}
+			case "Résolution":
+				d = "Perdez immédiatement un gène de votre choix si vous n’avez pas l’évolution Amphibie, Système immunitaire ou Pied Palmés";
+				hazard = new Hazard(tag, d, new Vector2(0, 50), new string[] { }, "");
 				break;
 		}
 

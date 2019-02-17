@@ -57,10 +57,8 @@ public class MatchManager : MonoBehaviour {
 		currentMatch = newMatch;
 		historyMatches.Add(newMatch);
 
-        //Text
-        TextManager.instance.SetTitle(currentMatch.GetName());
-        TextManager.instance.SetRules(currentMatch.GetRules());
-        TextManager.instance.SetHazards("");
+		//Text
+		DisplayText(newMatch);
     }
 
 	public Hazard NextTurn()
@@ -82,4 +80,32 @@ public class MatchManager : MonoBehaviour {
     {
         return playerNames;
     }
+
+	public void SetWinner(int id)
+	{
+		currentMatch.SetWinnerId(id, GetPlayerName(id));
+	}
+
+	public Match GetMatch(int i)
+	{
+		return historyMatches[i];
+	}
+
+	public int GetNbMatch()
+	{
+		return nbMatch;
+	}
+
+	public int GetNbTurn()
+	{
+		return currentMatch.turnId;
+	}
+
+	public void DisplayText(Match m)
+	{
+		TextManager.instance.SetTitle(m.GetName());
+		TextManager.instance.SetRules(m.GetRules());
+		TextManager.instance.SetHazards(m.GetHazards());
+		TextManager.instance.SetDescription(m.GetDescription());
+	}
 }
